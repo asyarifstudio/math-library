@@ -1,7 +1,51 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "80cb6559-4b41-42d4-b173-b736e5b31d2b"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-  }
+    "math-markdown": {
+      "projectType": "library",
+      "root": "projects/math-markdown",
+      "sourceRoot": "projects/math-markdown/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/math-markdown/tsconfig.lib.json",
+            "project": "projects/math-markdown/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/math-markdown/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/math-markdown/src/test.ts",
+            "tsConfig": "projects/math-markdown/tsconfig.spec.json",
+            "karmaConfig": "projects/math-markdown/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/math-markdown/tsconfig.lib.json",
+              "projects/math-markdown/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "math-markdown"
 }
