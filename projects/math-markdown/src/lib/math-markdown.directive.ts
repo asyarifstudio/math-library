@@ -1,7 +1,7 @@
 import { Directive, ElementRef, Input, OnChanges } from "@angular/core";
-const micromark = require('micromark');
-const math = require('micromark-extension-math')
-const mathHtml = require('micromark-extension-math/html')
+import { micromark } from 'micromark';
+import { math,mathHtml } from 'micromark-extension-math';
+
 
 @Directive({
     selector: "[math-markdown]",
@@ -18,20 +18,18 @@ export class MathMarkdownDirective implements OnChanges {
         //Called after ngOnInit when the component's or directive's content has been initialized.
         //Add 'implements AfterContentInit' to the class.
         if (!this.text) {
-            this.el.nativeElement.innerHTML = micromark(this.el.nativeElement.innerHTML,
-                {
-                    extensions: [math],
-                    htmlExtensions: [mathHtml()]
-                }
-            )
+            this.el.nativeElement.innerHTML = micromark(this.el.nativeElement.innerHTML,{
+                extensions:[math()],
+                htmlExtensions:[mathHtml()]
+            })
         }
     }
 
     ngOnChanges() {
         if (this.text) {
-            this.el.nativeElement.innerHTML = micromark(this.text,
+            this.el.nativeElement.innerHTML = micromark(this.el.nativeElement.innerHTML,
                 {
-                    extensions: [math],
+                    extensions: [math()],
                     htmlExtensions: [mathHtml()]
                 }
             )
